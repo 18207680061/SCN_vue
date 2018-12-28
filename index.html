@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>ljk</title>
+    <style>
+      body{
+        background-color: #f0f0f0;
+      }
+      main{
+        max-width: 640px;
+        min-width: 320px;
+        margin: 0 auto;
+      }
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <body>
+    <div id="app"></div>
+
+    <script src="/dist/build.js"></script>
+    <script src="src/assets/js/jquery-1.11.1.js"></script>
+    <script>
+
+      //获取标签
+      // $('.slideMask').mousedown(function (e) {
+      //   //获取起始位置
+      //   var begin=e.clientX-$('.slideMask').offset().left;
+      //   //监听鼠标移动
+      //   $(document).mousemove(function (e) {
+      //     var x=e.clientX -begin;
+      //     console.log(e.clientX,begin);
+      //     //获取移动的位置
+      //     //边界值
+      //     if (x<0){
+      //         x=0;
+      //     }else if (x>=$('.slideBar').width()-$('.slideMask').width()){
+      //       x=$('.slideBar').width()-$('.slideMask').width();
+      //     }
+      //     //走起来
+      //     $('.slideMask').css('left',x+'px');
+      //     $('.barBg').css('width',x+'px');
+      //     return false;
+      //   });
+      //
+      // });
+      // //监听鼠标抬起
+      // $(document).mouseup(function () {
+      //     return false;
+      // })
+      slideMask.onmousedown=function (e) {
+        //获取起始位置
+        var begin=e.clientX-slideMask.offsetLeft;
+          console.log(begin);
+          //监听鼠标移动
+        document.onmousemove=function (e) {
+          var x=e.clientX-begin;//移动距离
+          //边界值
+          if (x<0){
+            x=0
+          }else if(x>=slideBar.offsetWidth-slideMask.offsetWidth){
+            x=slideBar.offsetWidth-slideMask.offsetWidth;
+          }
+          //移动起来
+          slideMask.style.left=x+'px';
+          barBg.style.width=x+'px';
+          return false;
+        };
+        slideMask.onmouseup=function () {
+          document.onmousemove=null;
+        }
+      }
+    </script>
+  </body>
+</html>
